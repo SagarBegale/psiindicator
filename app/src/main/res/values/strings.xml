@@ -2,4 +2,6 @@
     <string name="app_name">PSI Indicator</string>
     <string name="title_activity_maps">Map</string>
     <string name="markerText">PSI for %1$s is: %2$d</string>
+    <string name="last_updated">Last Updated:</string>
+    <string name="network_offline">Network connection not available.</string>
 </resources>

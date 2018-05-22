@@ -23,12 +23,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -62,13 +60,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
+
     void addMarkerOnMap(final RegionPsiData regionPsiData) {
         if (regionPsiData != null) {
             final String markerText = getString(R.string.markerText, regionPsiData.getRegionLabel
                     (), regionPsiData.getPsiIndex());
             LatLng latLng = new LatLng(regionPsiData.getLatitude(), regionPsiData.getLongitude());
             mMap.addMarker(new MarkerOptions().position(latLng).title(markerText));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(regionPsiData.getLatitude
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(regionPsiData
+                    .getLatitude
                     (), regionPsiData.getLongitude()), 10));
         }
     }

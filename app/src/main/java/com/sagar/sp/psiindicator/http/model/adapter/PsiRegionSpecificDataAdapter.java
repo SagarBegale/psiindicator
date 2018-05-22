@@ -15,35 +15,41 @@ public final class PsiRegionSpecificDataAdapter {
         RegionPsiData north = null;
         RegionPsiData south = null;
         RegionPsiData central = null;
-        for (final RegionMetaData regionMetaData : psiResponse.getRegionMetaDataList()) {
-            final LabelLocation labelLocation = regionMetaData.getLabelLocation();
-            switch (regionMetaData.getName()) {
-                case "east":
-                    east = new RegionPsiData("East", labelLocation.getLatitude(), labelLocation
-                            .getLongitude(), psiResponse.getItem().get(0).getReading()
-                            .getPsiTwentyFourHourly().getEast());
-                    break;
-                case "west":
-                    west = new RegionPsiData("West", labelLocation.getLatitude(), labelLocation
-                            .getLongitude(), psiResponse.getItem().get(0).getReading()
-                            .getPsiTwentyFourHourly().getWest());
+        if (psiResponse != null) {
+            for (final RegionMetaData regionMetaData : psiResponse.getRegionMetaDataList()) {
+                final LabelLocation labelLocation = regionMetaData.getLabelLocation();
+                switch (regionMetaData.getName()) {
+                    case "east":
+                        east = new RegionPsiData("East", labelLocation.getLatitude(), labelLocation
+                                .getLongitude(), psiResponse.getItem().get(0).getReading()
+                                .getPsiTwentyFourHourly().getEast());
+                        break;
+                    case "west":
+                        west = new RegionPsiData("West", labelLocation.getLatitude(), labelLocation
+                                .getLongitude(), psiResponse.getItem().get(0).getReading()
+                                .getPsiTwentyFourHourly().getWest());
 
-                    break;
-                case "north":
-                    north = new RegionPsiData("North", labelLocation.getLatitude(), labelLocation
-                            .getLongitude(), psiResponse.getItem().get(0).getReading()
-                            .getPsiTwentyFourHourly().getNorth());
-                    break;
-                case "south":
-                    south = new RegionPsiData("South", labelLocation.getLatitude(), labelLocation
-                            .getLongitude(), psiResponse.getItem().get(0).getReading()
-                            .getPsiTwentyFourHourly().getSouth());
-                    break;
-                case "central":
-                    central = new RegionPsiData("Central", labelLocation.getLatitude(),
-                            labelLocation.getLongitude(), psiResponse.getItem().get(0).getReading
-                            ().getPsiTwentyFourHourly().getCentral());
-                    break;
+                        break;
+                    case "north":
+                        north = new RegionPsiData("North", labelLocation.getLatitude(),
+                                labelLocation
+
+                                .getLongitude(), psiResponse.getItem().get(0).getReading()
+                                .getPsiTwentyFourHourly().getNorth());
+                        break;
+                    case "south":
+                        south = new RegionPsiData("South", labelLocation.getLatitude(),
+                                labelLocation
+                                        .getLongitude(), psiResponse.getItem().get(0).getReading()
+                                .getPsiTwentyFourHourly().getSouth());
+                        break;
+                    case "central":
+                        central = new RegionPsiData("Central", labelLocation.getLatitude(),
+                                labelLocation.getLongitude(), psiResponse.getItem().get(0)
+                                .getReading
+                                ().getPsiTwentyFourHourly().getCentral());
+                        break;
+                }
             }
         }
         return new PsiRegionSpecificData(east, west, north, south, central);
