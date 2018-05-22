@@ -19,28 +19,28 @@ public final class PsiRegionSpecificDataAdapter {
             final LabelLocation labelLocation = regionMetaData.getLabelLocation();
             switch (regionMetaData.getName()) {
                 case "east":
-                    east = new RegionPsiData("east", labelLocation.getLatitude(), labelLocation
+                    east = new RegionPsiData("East", labelLocation.getLatitude(), labelLocation
                             .getLongitude(), psiResponse.getItem().get(0).getReading()
                             .getPsiTwentyFourHourly().getEast());
                     break;
                 case "west":
-                    west = new RegionPsiData("west", labelLocation.getLatitude(), labelLocation
+                    west = new RegionPsiData("West", labelLocation.getLatitude(), labelLocation
                             .getLongitude(), psiResponse.getItem().get(0).getReading()
                             .getPsiTwentyFourHourly().getWest());
 
                     break;
                 case "north":
-                    north = new RegionPsiData("north", labelLocation.getLatitude(), labelLocation
+                    north = new RegionPsiData("North", labelLocation.getLatitude(), labelLocation
                             .getLongitude(), psiResponse.getItem().get(0).getReading()
                             .getPsiTwentyFourHourly().getNorth());
                     break;
                 case "south":
-                    south = new RegionPsiData("south", labelLocation.getLatitude(), labelLocation
+                    south = new RegionPsiData("South", labelLocation.getLatitude(), labelLocation
                             .getLongitude(), psiResponse.getItem().get(0).getReading()
                             .getPsiTwentyFourHourly().getSouth());
                     break;
                 case "central":
-                    central = new RegionPsiData("central", labelLocation.getLatitude(),
+                    central = new RegionPsiData("Central", labelLocation.getLatitude(),
                             labelLocation.getLongitude(), psiResponse.getItem().get(0).getReading
                             ().getPsiTwentyFourHourly().getCentral());
                     break;

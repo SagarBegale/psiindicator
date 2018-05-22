@@ -1,7 +1,10 @@
 package com.sagar.sp.psiindicator;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,10 +12,17 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sagar.sp.psiindicator.http.IRequestPsiCallback;
+import com.sagar.sp.psiindicator.http.PsiRequestFactory;
+import com.sagar.sp.psiindicator.http.model.PsiRegionSpecificData;
+import com.sagar.sp.psiindicator.http.model.RegionPsiData;
+import com.sagar.sp.psiindicator.util.LogUtil;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        IRequestPsiCallback {
 
     private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +47,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        Log.d(LogUtil.LOG_TAG, "onMapReady(): Requesting PSI");
+        PsiRequestFactory.getPsiRequester(this).execute();
+    }
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(1.35735,  103.7);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    @Override
+    public void onSuccess(PsiRegionSpecificData psiRegionSpecificData) {
+        Log.i(LogUtil.LOG_TAG, "onSuccess");
+        addMarkerOnMap(psiRegionSpecificData.getEast());
+        addMarkerOnMap(psiRegionSpecificData.getWest());
+        addMarkerOnMap(psiRegionSpecificData.getNorth());
+        addMarkerOnMap(psiRegionSpecificData.getSouth());
+        addMarkerOnMap(psiRegionSpecificData.getCentral());
+
+    }
+
+    void addMarkerOnMap(final RegionPsiData regionPsiData) {
+        if (regionPsiData != null) {
+            final String markerText = getString(R.string.markerText, regionPsiData.getRegionLabel
+                    (), regionPsiData.getPsiIndex());
+            LatLng latLng = new LatLng(regionPsiData.getLatitude(), regionPsiData.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(markerText));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(regionPsiData.getLatitude
+                    (), regionPsiData.getLongitude()), 10));
+        }
+    }
+
+    @Override
+    public void onFailure(final String errorMessage) {
+        Log.e(LogUtil.LOG_TAG, errorMessage);
+        final View parentLayout = findViewById(android.R.id.content);
+        Snackbar.make(parentLayout, "Failed to retrieve PSI index. Please try again.", Snackbar
+                .LENGTH_LONG).setActionTextColor(getResources().getColor(android.R.color
+                .holo_red_light))
+                .show();
     }
 }
