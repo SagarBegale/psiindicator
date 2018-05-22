@@ -14,11 +14,9 @@
         android:layout_height="wrap_content"
         android:text="@string/network_offline" />
 
-
     <fragment
         android:id="@+id/map"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="match_parent" />
 </LinearLayout>

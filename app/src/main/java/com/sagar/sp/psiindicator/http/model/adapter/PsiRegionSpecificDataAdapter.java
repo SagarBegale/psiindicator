@@ -6,6 +6,10 @@ import com.sagar.sp.psiindicator.http.model.PsiResponse;
 import com.sagar.sp.psiindicator.http.model.RegionMetaData;
 import com.sagar.sp.psiindicator.http.model.RegionPsiData;
 
+/**
+ * Adapter to adapt response from HTTP call. This will allow to have clear segregation between
+ * 3rd party library and internal representation
+ */
 public final class PsiRegionSpecificDataAdapter {
 
 
@@ -34,7 +38,7 @@ public final class PsiRegionSpecificDataAdapter {
                         north = new RegionPsiData("North", labelLocation.getLatitude(),
                                 labelLocation
 
-                                .getLongitude(), psiResponse.getItem().get(0).getReading()
+                                        .getLongitude(), psiResponse.getItem().get(0).getReading()
                                 .getPsiTwentyFourHourly().getNorth());
                         break;
                     case "south":
@@ -47,11 +51,13 @@ public final class PsiRegionSpecificDataAdapter {
                         central = new RegionPsiData("Central", labelLocation.getLatitude(),
                                 labelLocation.getLongitude(), psiResponse.getItem().get(0)
                                 .getReading
-                                ().getPsiTwentyFourHourly().getCentral());
+                                        ().getPsiTwentyFourHourly().getCentral());
                         break;
                 }
             }
         }
         return new PsiRegionSpecificData(east, west, north, south, central);
     }
+
+    //ADD more adapter based on the library and API used.
 }

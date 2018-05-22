@@ -12,6 +12,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import static com.sagar.sp.psiindicator.http.api.PsiApi.BASE_URL;
 
+/**
+ * Retrofit implement of PSI request
+ */
 public class RetrofitRequestPsiImpl implements IRequestPsi, Callback<PsiResponse> {
 
     private final IRequestPsiCallback requestPsiCallback;

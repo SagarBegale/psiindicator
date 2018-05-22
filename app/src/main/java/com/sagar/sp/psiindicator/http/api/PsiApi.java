@@ -8,6 +8,9 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 
+/**
+ * Interface for pPSI API
+ */
 public interface PsiApi {
 
        String BASE_URL = "https://api.data.gov.sg/v1/environment/";
