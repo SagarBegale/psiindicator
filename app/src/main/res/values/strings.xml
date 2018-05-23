@@ -4,4 +4,5 @@
     <string name="markerText">PSI for %1$s is: %2$d</string>
     <string name="last_updated">Last Updated:</string>
     <string name="network_offline">Network connection not available.</string>
+    <string name="unable_to_load_data">Unable to load PSI data. Please try again later</string>
 </resources>

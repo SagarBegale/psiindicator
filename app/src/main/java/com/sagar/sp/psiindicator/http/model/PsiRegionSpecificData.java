@@ -1,67 +1,27 @@
 package com.sagar.sp.psiindicator.http.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Aggregated data to be displayed within APP
  */
 public class PsiRegionSpecificData {
 
-    private final RegionPsiData east;
-    private final RegionPsiData west;
-    private final RegionPsiData north;
-    private final RegionPsiData south;
-    private final RegionPsiData central;
+    private final List<RegionPsiData> regionPsiDataList;
 
-    public PsiRegionSpecificData(RegionPsiData east, RegionPsiData west, RegionPsiData north,
-                                 RegionPsiData south, RegionPsiData central) {
-        this.east = east;
-        this.west = west;
-        this.north = north;
-        this.south = south;
-        this.central = central;
+    public PsiRegionSpecificData(RegionPsiData east, RegionPsiData west, RegionPsiData north, RegionPsiData south,
+                                 RegionPsiData central) {
+        regionPsiDataList = new ArrayList<>();
+        regionPsiDataList.add(east);
+        regionPsiDataList.add(west);
+        regionPsiDataList.add(north);
+        regionPsiDataList.add(south);
+        regionPsiDataList.add(central);
     }
 
-    /**
-     * Returns region data for East
-     *
-     * @return
-     */
-    public RegionPsiData getEast() {
-        return east;
-    }
-
-    /**
-     * Returns region data for West
-     *
-     * @return
-     */
-    public RegionPsiData getWest() {
-        return west;
-    }
-
-    /**
-     * Returns region data for North
-     *
-     * @return
-     */
-    public RegionPsiData getNorth() {
-        return north;
-    }
-
-    /**
-     * Returns region data for South
-     *
-     * @return
-     */
-    public RegionPsiData getSouth() {
-        return south;
-    }
-
-    /**
-     * Returns region data for Central
-     *
-     * @return
-     */
-    public RegionPsiData getCentral() {
-        return central;
+    public RegionPsiData[] getRegionPsiDatas() {
+        final RegionPsiData[] regionPsiData = new RegionPsiData[regionPsiDataList.size()];
+        return regionPsiDataList.toArray(regionPsiData);
     }
 }
